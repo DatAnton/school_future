@@ -28,6 +28,7 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
+    render 'edit'
   end
 
   def destroy
