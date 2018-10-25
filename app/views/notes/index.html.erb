@@ -1,0 +1,12 @@
+<h1 class="text-center" style="font-size:50px;color:#0099ff; margin:10px 10px 20px 10px">These are your notes:</h1>
+<ul class="list-group">
+<% @notes.each do |note| %>
+  <li class="list-group-item">
+    <%= link_to "#{note.content.split(' ')[0] + ' ' + if note.content.split(' ')[1] != nil then note.content.split(' ')[1] else '' end + ' ' + if note.content.split(' ')[2] != nil then (note.content.split(' '))[2] else '' end +  '...'}", note %>
+    <p class="text-right"><%= link_to "delete", note, method: :delete, data: { confirm: "You sure?" } %></p>
+  </li>
+<% end %>
+</ul>
+<div class="text-right">
+  <%= link_to image_tag("new_note.png", :alt => "create button"), new_note_path, class: "text-right", style: "margin:0 30px 20px 20px" %>
+</div>

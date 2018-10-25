@@ -1,0 +1,11 @@
+<div>
+  <div class="card">
+    <div class="text-left">
+      <%= link_to "To all notes", users_notes_path, style: "margin: 20px" %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Yor note:</h5>
+      <p class="card-text"><%= @note.content %></p>
+      <%= link_to 'Edit', edit_note_path, class: "btn btn-primary", style: "margin: 20px"  %>
+    </div>
+  </div>

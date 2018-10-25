@@ -1,0 +1,21 @@
+<table class="table table-bordered">
+  <tr>
+    <th scope="col">#</th>
+      <th scope="col">Monday</th>
+      <th scope="col">Tuesday</th>
+      <th scope="col">Wednesday</th>
+      <th scope="col">Thursday</th>
+      <th scope="col">Friday</th>
+  </tr>
+
+  <% (0..7).each do |i| %>
+    <tr>
+      <th scope="row"><%= i + 1 %></th>
+      <% @subjects[i].each do |subj| %>
+        <td>
+          <%= subj %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

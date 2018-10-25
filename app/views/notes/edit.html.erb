@@ -1,0 +1,12 @@
+<h1>Update a note</h1>
+
+<div class="form-group">
+    <%= form_for(@note) do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <%= f.label :content, for: "exampleFormControlTextarea1" %>
+    <%= f.text_area :content, class: "form-control", id: "exampleFormControlTextarea1", rows: 3 %>
+
+    <%= f.submit "Save changes", class: "btn btn-primary", style: "margin: 20px 10px 10px 10px" %>
+    <% end %>
+</div>

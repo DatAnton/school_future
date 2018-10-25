@@ -1,0 +1,18 @@
+<% navigation = [
+  { params: { controller: 'user', action: ['profile'], user_type: ["student", "teacher", "admin", "undefined"]}, title: 'Profile', link: root_path },
+  { params: { controller: 'user', action: ['lessons'], user_type: ["student", "teacher"]}, title: 'Lessons', link: users_lessons_path },
+  { params: { controller: 'user', action: ['control_users'], user_type: ["admin"]}, title: 'Control Users', link: users_control_users_path },
+  { params: { controller: 'note', action: ['index', 'new', 'show', 'edit', 'update', 'create'], user_type: ["student", "teacher", "admin", "undefined"]}, title: 'My Notes', link: users_notes_path }
+]
+%>
+<ul class="nav nav-tabs card-header-tabs">
+  <% navigation.each do |nav| %>
+    <li class="nav-item">
+    <% if nav[:params][:action].include?(controller.action_name.downcase) && nav[:params][:user_type].include?(current_user.user_type) %>
+      <%= link_to nav[:title], nav[:link], class: "nav-link active" %>
+    <% elsif nav[:params][:user_type].include?(current_user.user_type) %>
+      <%= link_to nav[:title], nav[:link], class: "nav-link" %>
+    <% end %>
+    </li>
+  <% end %>
+</ul>
