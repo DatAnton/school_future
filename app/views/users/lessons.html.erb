@@ -8,12 +8,13 @@
       <th scope="col">Friday</th>
   </tr>
 
-  <% (0..7).each do |i| %>
+  <% (1..7).each do |lesson_number| %>
     <tr>
-      <th scope="row"><%= i + 1 %></th>
-      <% @subjects[i].each do |subj| %>
+      <th scope="row"><%= lesson_number %></th>
+
+      <% (1..5).each do |day| %>
         <td>
-          <%= subj %>
+          <%= lesson_from_schedule(@objects[day], lesson_number) %>
         </td>
       <% end %>
     </tr>

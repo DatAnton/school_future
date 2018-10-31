@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  pundit:
+    user_policy:
+      edit?: 'Sorry, this action allowed only for admin'

@@ -1,0 +1,11 @@
+<%= link_to 'Controll all', users_control_all_path, class: 'btn btn-light' %>&nbsp;
+<%= link_to 'Controll students and teachers', users_control_students_path, class: 'btn btn-light disabled' %>&nbsp;
+<% if @users_new_count != 0 %>
+  <%= link_to "Controll new users(#{@users_new_count})", users_control_undef_users_path, class: 'btn btn-light' %>&nbsp;
+<% end %>
+
+<h1>Controll students and teachers</h1>
+
+<ul class="list-group">
+    <%= render @users %>
+</ul>

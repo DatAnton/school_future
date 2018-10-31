@@ -13,4 +13,8 @@ class User < ApplicationRecord
   has_many :users_and_subject
   has_many :subjects, through: :users_and_subject
   has_many :notes
+
+  def admin?
+    user_type == 'admin'
+  end
 end

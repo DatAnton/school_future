@@ -1,4 +1,9 @@
 <li class="list-group-item">
-<%= user.first_name %> <%= user.last_name %> type: <%= user.user_type %>
-| <%= link_to "Edit", user_registration_path(user), method: :edit %>
+<%= user.first_name %> <%= user.last_name %> type: <%= user.user_type %>&nbsp;|
+<% if controller.action_name != 'control_students' %>
+  <%= link_to "Edit", edit_user_path(user) %>
+<% else %>
+  <%= link_to "Edit", users_edit_student_path(user) %>
+<% end %>
+<p class="text-right"><%= link_to "delete", destroy_user_path(user), class: "text-danger", method: :delete, data: { confirm: "You sure?" } %></p>
 </li>

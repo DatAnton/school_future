@@ -41,11 +41,10 @@ class NotesController < ApplicationController
    @note = Note.find(params[:id])
    if @note.update_attributes(note_params)
      flash[:success] = "Your note saved successfuly!"
-     redirect_to @note
    else
      flash[:danger] = "Cannot be empty!"
-     redirect_to @note
    end
+   redirect_to @note
  end
 
   private
