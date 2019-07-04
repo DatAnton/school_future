@@ -1,0 +1,8 @@
+<h1>All forms</h1>
+
+<ul class="list-group">
+  <%= render @forms %>
+</ul>
+<% if current_user.admin? %>
+  <%= link_to 'New Form', new_form_path, class: 'btn btn-light', style: 'margin: 20px' %>
+<% end %>

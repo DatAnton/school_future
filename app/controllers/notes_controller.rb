@@ -1,10 +1,6 @@
 class NotesController < ApplicationController
   def index
-    @notes = []
-    nots = Note.all.where(user_id: current_user.id)
-    nots.each do |n|
-      @notes << n
-    end
+    @notes = Note.all.where(user_id: current_user.id)
   end
 
   def new

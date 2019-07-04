@@ -1,0 +1,8 @@
+<h1>Create new teacher's subject</h1>
+<div class="form-group">
+    <%= form_for :users_and_subject do |f| %>
+    <%= f.hidden_field :user_id, value: params[:user_id] %>
+    <%= f.select :subject_id, options_for_select(get_new_teacher_subjects(params[:user_id])) %>
+    <%= f.submit 'Create', class: "btn btn-primary", style: "margin: 20px 10px 10px 10px" %>
+    <% end %>
+</div>

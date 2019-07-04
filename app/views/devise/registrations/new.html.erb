@@ -8,6 +8,11 @@
 <% end %>
 
   <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
     <%= f.label "First name" %><br />
     <%= f.text_field :first_name, autocomplete: "first_name", autofocus: true, style: "width:200px" %>
   </div>

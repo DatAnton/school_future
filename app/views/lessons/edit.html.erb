@@ -1,0 +1,22 @@
+<h1>Edit a lesson!</h1>
+<p class="text-left">
+  <%= link_to '<- Back', :back %>
+</p>
+
+<div id="app">
+<%= form_for(@lesson) do |f| %>
+  <div class="field">
+    <%= f.label :subject %><br />
+    <%= select_tag :subject_id, options_for_select(get_subjects, [@lesson.subject.name, @lesson.subject.id]), style: "width:200px" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :teacher %><br />
+    <%= select_tag :user_id, options_for_select(get_teachers, ["#{@lesson.user.first_name} #{@lesson.user.last_name}", @lesson.user.id]), style: "width:200px" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update", class: 'btn btn-primary', style: 'margin: 20px' %>
+  </div>
+<% end %>
+</div>

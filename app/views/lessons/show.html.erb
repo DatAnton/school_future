@@ -1,0 +1,23 @@
+<p class="text-left">
+  <%= link_to '<- To Schedule', lessons_index_path(form_id: @lesson.form_id) %>
+</p>
+<p>Subject: <%= @lesson.subject.name %></p>
+<p>Teacher: <%= link_to "#{@lesson.user.first_name} #{@lesson.user.last_name}", user_show_path(@lesson.user) %></p>
+<p>Day: <%= get_word_day(@lesson.day) %></p>
+<p>Number: <%= @lesson.number %></p>
+<% if !@homework.nil? %>
+<p>Homework:</p>
+  <div class="card">
+    <div class="card-body">
+      <%= @homework.homework %> &nbsp;&nbsp;
+      <% if current_user.user_type == 'teacher' %>
+        <%= link_to 'Edit', (edit_homework_path homework_id: @homework.id), class: 'btn btn-secondary' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<%= link_to 'Add homework', (new_homework_path lesson_id: @lesson.id), class: 'btn btn-primary', style: 'margin: 20px' if current_user.user_type == 'teacher' %>
+<% if current_user.user_type == 'admin'%>
+  <%= link_to 'Edit Lesson', lessons_edit_lesson_path(@lesson), class: 'btn btn-primary' %>&nbsp;&nbsp;
+  <%= link_to 'Delete Lesson', lessons_destroy_lesson_path(@lesson), class: 'btn btn-primary', method: :delete, data: { confirm: "You sure?" } %>
+<% end %>

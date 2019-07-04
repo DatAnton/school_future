@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_151754) do
+ActiveRecord::Schema.define(version: 2019_02_11_182914) do
 
   create_table "forms", force: :cascade do |t|
     t.string "name"
@@ -19,10 +19,26 @@ ActiveRecord::Schema.define(version: 2018_10_23_151754) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "grades", force: :cascade do |t|
+    t.integer "grade"
+    t.integer "subject_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "homeworks", force: :cascade do |t|
+    t.integer "lesson_id"
+    t.string "homework"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lessons", force: :cascade do |t|
     t.integer "number"
     t.integer "day"
     t.integer "subject_id"
+    t.integer "user_id"
     t.integer "form_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,7 +61,7 @@ ActiveRecord::Schema.define(version: 2018_10_23_151754) do
     t.string "first_name"
     t.string "last_name"
     t.string "user_type", default: "undefined"
-    t.integer "form_id", default: 1
+    t.integer "form_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -53,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_10_23_151754) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

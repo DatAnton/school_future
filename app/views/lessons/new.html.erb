@@ -1,0 +1,29 @@
+<h1>Add a lesson!</h1>
+
+<%= form_for(@lesson) do |f| %>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.select :number, options_for_select((1..7)) , style: "width:200px" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :day %><br />
+    <%= f.select :day, options_for_select(get_all_days), style: "width:200px" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subject %><br />
+    <%= f.select :subject_id, options_for_select(get_subjects), style: "width:200px" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :teacher %><br />
+    <%= f.select :user_id, options_for_select(get_teachers), style: "width:200px" %>
+  </div>
+
+  <%= f.hidden_field :form_id, value: params[:form_id] %>
+
+  <div class="actions">
+    <%= f.submit "Add", class: 'btn btn-primary', style: 'margin: 20px' %>
+  </div>
+<% end %>

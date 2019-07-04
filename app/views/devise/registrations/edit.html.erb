@@ -8,6 +8,11 @@
 <% end %>
 
   <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
     <%= f.label "First name" %><br />
     <%= f.text_field :first_name, autocomplete: "first_name", autofocus: true, style: "width:200px" %>
   </div>
@@ -42,10 +47,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Update", class: 'btn btn-primary', style: 'margin: 20px' %>
+    <%= f.submit "Update", class: 'btn btn-primary', style: 'margin:  5px' %>
   </div>
 <% end %>
-
-<!-- <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p> -->
-
-<%= link_to "To My profile", root_path %>

@@ -5,4 +5,11 @@ class ApplicationPolicy
     @user = user
     @record = record
   end
+
+  # private
+  #
+  # # delegate :admin?, to: :user
+  # def admin?
+  #   user.admin?
+  # end
 end

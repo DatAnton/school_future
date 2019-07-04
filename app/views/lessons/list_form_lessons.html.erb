@@ -1,0 +1,9 @@
+<h1>Select form</h1>
+
+<ul class="list-group">
+<% @forms.each do |form| %>
+  <li class="list-group-item justify-content-between align-items-center">
+    <%= link_to form.name, lessons_index_path(form_id: form.id) %>
+  </li>
+<% end %>
+</ul>

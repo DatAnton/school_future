@@ -1,0 +1,24 @@
+<h2>Form: <%= current_user.form.name %></h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Subject</th>
+      <% days = get_last_7_days %>
+      <% days.each do |d| %>
+      <th scope="col" class="text-info"><%= d.strftime('%a') %>, <%= d.day %> <%= d.strftime('%B') %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subjects.each do |subject| %>
+      <tr>
+        <th scope="row"><%= subject.name %></th>
+        <% grades_s = get_student_grades(current_user.id,  subject.id) %>
+        <% grades_s.each do |g| %>
+          <td scope="col"><%= g %></td>
+        <% end %>
+      <tr>
+    <% end %>
+  </tbody>
+</table>

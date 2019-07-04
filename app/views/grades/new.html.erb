@@ -1,0 +1,18 @@
+<h1>Set a grade!</h1>
+
+<%= form_for @grade do |f| %>
+  <div>
+    <%= f.label :subject %><br />
+    <%= f.select :subject_id, options_for_select(get_teacher_subject), style: "width:200px", class: 'custom-select', id: 'inputGroupSelect02' %>
+  </div>
+
+  <div>
+    <%= f.label :grade %><br />
+    <%= f.select :grade, options_for_select((1..12)), style: "width:200px", class: 'custom-select', id: 'inputGroupSelect02' %>
+  </div>
+  <%= f.hidden_field :user_id, value: params[:user_id] %>
+  
+  <div class="actions">
+    <%= f.submit "Add", class: 'btn btn-primary', style: 'margin: 20px' %>
+  </div>
+<% end %>

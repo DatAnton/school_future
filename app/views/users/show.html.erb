@@ -1,1 +1,28 @@
-<h1>ewg</h1>
+<h1>User</h1>
+<h2 class="text-left text-info"><%= image_tag(@user.avatar.url, alt: 'Image',
+  style: 'width:75px; height:75px;border-radius:5px') if @user.avatar? %> <%= @user.first_name %>
+  <%= @user.last_name %></h2>
+<h3 class="text-left text-info"><%= @user.email %> <br /><%= @user.user_type %></h3>
+<% if controller_name == 'grades' && controller.action_name == 'index' && current_user.admin? || current_user.user_type == 'teacher' %>
+<% if @user.user_type == 'student' %>
+  <p class="text-left">
+    <%= link_to "Set a grade", new_grade_path(user_id: @user.id), class: "btn btn-success", style: 'margin: 20px' %>
+  </p>
+  <% end %>
+<% end %>
+<% if @user.user_type == 'teacher' %>
+<h4>Subjects of this teacher:</h4>
+  <% if @user.subjects.length == 0 %>
+    <div class="alert alert-info">Teacher don't teach any subject.</div>
+  <% else %>
+    <ul class="list-group">
+      <% @user.subjects.each do |s| %>
+        <li class="list-group-item">
+          <%= s.name %>
+          <%= link_to "delete", users_and_subject_path(subject_id: s.id, user_id: @user.id), class: "text-danger close", aria_label: "Close", method: :delete, data: { confirm: "You sure?" } %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= link_to 'New teacher''s subject', new_users_and_subject_path(user_id: @user.id), class: 'btn btn-primary', style: 'margin:20px' %>
+<% end %>

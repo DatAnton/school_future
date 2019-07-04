@@ -1,15 +1,20 @@
 <% navigation = [
-  { params: { controller: 'user', action: ['profile'], user_type: ["student", "teacher", "admin", "undefined"]}, title: 'Profile', link: root_path },
-  { params: { controller: 'user', action: ['lessons'], user_type: ["student", "teacher"]}, title: 'Lessons', link: users_lessons_path },
-  { params: { controller: 'user', action: ['control_undef_users', 'control_all', 'control_students', 'edit_student', 'update_student_form', 'edit', 'update'], user_type: ["admin"]}, title: 'Control Users', link: users_control_all_path },
-  { params: { controller: 'note', action: ['index', 'new', 'show', 'edit', 'update', 'create'], user_type: ["student", "teacher", "admin", "undefined"]}, title: 'My Notes', link: users_notes_path }
+  { params: { controller: ['users'], action: ['profile'], user_type: ["student", "teacher", "admin", "undefined"]}, title: 'Profile', link: root_path },
+  { params: { controller: ['lessons', 'homeworks'], action: ['index', 'show', 'new', 'edit'], user_type: ["student", "teacher"]}, title: 'Lessons', link: lessons_index_path },
+  { params: { controller: ['users'], action: ['control_undef_users', 'control_all', 'edit_student', 'update_student_form', 'edit', 'update', 'show'], user_type: ["admin"]}, title: 'Control Users', link: users_control_all_path },
+  { params: { controller: ['lessons'], action: ['list_form_lessons', 'index', 'show', 'new', 'update', 'edit'], user_type: ['admin']}, title: 'Schedules', link: lessons_list_form_lessons_path },
+  { params: { controller: ['forms'], action: ['index', 'show', 'new', 'update', 'edit'], user_type: ['admin']}, title: 'All Forms', link: forms_path },
+  { params: { controller: ['grades'], action: ['index', 'show', 'new', 'update', 'edit', 'list_form', 'list_subject'], user_type: ['admin', 'teacher']}, title: 'Grades', link: grades_list_form_path },
+  { params: { controller: ['grades'], action: ['index', 'index_for_student'], user_type: ['student']}, title: 'My grades', link: grades_index_for_student_path },
+  { params: { controller: ['users_and_subject'], action: ['set_teacher_subject', 'new', 'create', 'destroy'], user_type: ['admin']}, title: 'Teacher_Subject', link: users_and_subject_set_teacher_subject_path },
+  { params: { controller: ['notes'], action: ['index', 'new', 'show', 'edit', 'update', 'create'], user_type: ["student", "teacher", "admin", "undefined"]}, title: 'My Notes', link: users_notes_path }
 ]
 %>
-<!-- <p><%= controller.action_name %></p> -->
+
 <ul class="nav nav-tabs card-header-tabs">
   <% navigation.each do |nav| %>
     <li class="nav-item">
-    <% if nav[:params][:action].include?(controller.action_name.downcase) && nav[:params][:user_type].include?(current_user.user_type) && "#{nav[:params][:controller]}s" == controller_name %>
+    <% if nav[:params][:action].include?(controller.action_name.downcase) && nav[:params][:user_type].include?(current_user.user_type) && nav[:params][:controller].include?(controller_name) %>
       <%= link_to nav[:title], nav[:link], class: "nav-link active" %>
     <% elsif nav[:params][:user_type].include?(current_user.user_type) %>
       <%= link_to nav[:title], nav[:link], class: "nav-link" %>

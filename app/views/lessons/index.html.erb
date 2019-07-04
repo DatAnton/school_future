@@ -1,0 +1,49 @@
+<% if @form != '' %>
+  <h1><%= @form.name %></h1>
+<% end %>
+
+<table class="table table-bordered">
+  <tr>
+    <th scope="col">#</th>
+      <th scope="col">Monday</th>
+      <th scope="col">Tuesday</th>
+      <th scope="col">Wednesday</th>
+      <th scope="col">Thursday</th>
+      <th scope="col">Friday</th>
+  </tr>
+
+  <% (1..7).each do |lesson_number| %>
+    <tr>
+      <th scope="row"><%= lesson_number %></th>
+
+      <% (1..5).each do |day| %>
+        <td>
+          <% lesson = lesson_from_schedule(@objects[day], lesson_number) %>
+          <% if lesson != '' %>
+            <% if current_user.user_type == 'teacher' %>
+              <%= link_to lesson.subject.name, lesson %>&nbsp;&nbsp;&nbsp; |
+              <%= link_to lesson.form.name, lesson.form %>
+            <% elsif current_user.user_type == 'student' %>
+              <%= link_to lesson.subject.name, lesson %>&nbsp;&nbsp;&nbsp; |
+              <% if lesson.user_id == 1 %>
+                <%= 'None' %>
+              <% else %>
+                <%= link_to "#{lesson.user.first_name} #{lesson.user.last_name}", user_show_path(lesson.user) %>
+              <% end %>
+            <% elsif current_user.user_type == 'admin' %>
+              <%= link_to lesson.subject.name, lesson %>&nbsp;&nbsp;&nbsp; |
+              <% if lesson.user_id == 1 %>
+                <span style="color:red"><%= 'None' %></span>
+              <% else %>
+                <%= link_to "#{lesson.user.first_name} #{lesson.user.last_name}", user_show_path(lesson.user) %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= lesson %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<%= if current_user.user_type == 'admin' then link_to 'Add Lesson', new_lesson_path(form_id: @form.id), class: 'btn btn-primary' else '' end %>

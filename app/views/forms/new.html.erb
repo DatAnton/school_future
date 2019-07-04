@@ -1,0 +1,18 @@
+<p class="text-left">
+  <%=link_to '<- Back', :back %>
+</p>
+<h1>Create a new form!</h1>
+
+<%= form_for @form do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+<br />
+  <% if get_free_teachers.count > 0 %>
+    <%= f.label :teacher %>
+    <%= f.select :user_id, options_for_select(get_free_teachers) %>
+  <% else %>
+    <%= f.hidden_field :user_id, value: nil %>
+  <% end %>
+<br />
+  <%= f.submit 'Create', class: 'btn btn-primary' %>
+<% end %>

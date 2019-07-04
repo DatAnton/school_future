@@ -1,0 +1,23 @@
+<p class="text-left">
+  <% if current_user.admin? %>
+    <%= link_to '<- To Forms', forms_path %>
+  <% else %>
+    <%= link_to '<- To Schedule', lessons_path %>
+  <% end %>
+</p>
+<h2>Form: <%= @form.name %></h2>
+<% if @form.user_id != nil %>
+  <% teacher = User.find(@form.user_id) %>
+  <p>Class teacher: <%= link_to find_name_class_teacher(@form), user_show_path(teacher) %>
+    <%= image_tag(teacher.avatar.url, alt: 'Image',
+    style: 'width:35px; height:35px;border-radius:5px') if teacher.avatar? %></p>
+<% end %>
+<% if @form.users.length != 0 %>
+  <h2>Students</h2>
+  <ul class="list-group">
+      <%= render @students %>
+  </ul>
+<% end %>
+<% if current_user.user_type == 'admin'%>
+  <%= link_to 'Edit Form', edit_form_path, class: 'btn btn-primary', style: 'margin: 20px' %>&nbsp;&nbsp;
+<% end %>
