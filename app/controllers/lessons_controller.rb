@@ -1,4 +1,11 @@
 class LessonsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
+  def index_admin
+    @form = Form.find params[:form_id]
+    @lessons = Lesson.where(form_id: @form.id).group_by(&:day)
+  end
+  
   def index
     @user = current_user
     if current_user.user_type == 'student'
@@ -26,6 +33,23 @@ class LessonsController < ApplicationController
             end
 
     @objects = scope.group_by(&:day)
+  end
+
+  def get_teachers_of_subject
+    # @selected_users = []
+    # @lesson = Lesson.find params[:lesson_id]
+    # @subject = Subject.find params[:subject_id]
+    # @selected_users << @lesson.user if @lesson.user.user_type == 'teacher'
+    #
+    # @subject.users.each do |user|
+    #   if User.is_free_for_lessons?(user.lessons, @lesson)
+    #     puts "YES"
+    #     @selected_users << user
+    #   end
+    # end
+    # render json: @selected_users
+    @subject = Subject.find params[:subject_id]
+    render json: @subject.users
   end
 
   def list_form_lessons
@@ -62,6 +86,10 @@ class LessonsController < ApplicationController
   def show
     @lesson = Lesson.find(params[:id])
     @homework = @lesson.homeworks.last
+    respond_to do |format|
+      format.html {  }
+      format.json  { render json: @lesson }
+    end
   end
 
   def edit
@@ -73,11 +101,10 @@ class LessonsController < ApplicationController
     authorize current_user, :edit_lessons?
     @lesson = Lesson.find(params[:id])
     if @lesson.update_attributes(subject_id: params[:subject_id], user_id: params[:user_id])
-      flash[:success] = "OK"
+      render json: @lesson, status: :ok
     else
-      flash[:danger] = 'Something goes wrong!'
+      render json: @lesson
     end
-    redirect_to @lesson
   end
 
   private

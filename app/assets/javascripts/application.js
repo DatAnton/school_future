@@ -13,4 +13,11 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+
+//= require popper
+//= require bootstrap
 //= require_tree .
+
+import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
+import { BModal, VBModal } from 'bootstrap-vue'

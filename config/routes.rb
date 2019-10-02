@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
+  root 'users#profile'
   devise_for :users
   get 'users/profile'
 
   get 'users/:id/edit', to: 'users#edit', as: :edit_user
   put 'users/:id', to: 'users#update', as: :update_user
   get 'users/:id/show', to: 'users#show', as: :user_show
-  root 'users#profile'
-  # get 'users/profile', as: 'user_root'
+  get 'users/get_teachers', to: 'users#get_teachers'
+
   get 'lessons/index', to: 'lessons#index'
   get 'users/control_undef_users', to: 'users#control_undef_users'
   get 'users/control_all', to: 'users#control_all'
@@ -15,8 +16,10 @@ Rails.application.routes.draw do
   get 'users/notes', to: 'notes#index'
   get 'lessons/list_form_lessons', to: 'lessons#list_form_lessons'
   get 'lessons/:id/edit', to: 'lessons#edit', as: 'lessons_edit_lesson'
-  put 'lessons/:id/update', to: 'users#update', as: 'lessons_update_lesson'
   delete 'lessons/:id/destroy', to: 'lessons#destroy', as: 'lessons_destroy_lesson'
+
+  get 'lessons/get_teachers_of_subject', to: 'lessons#get_teachers_of_subject'
+  get 'lessons/index_admin', to: 'lessons#index_admin', as: 'index_admin'
 
   get 'grades/list_form', to: 'grades#list_form'
   get 'grades/list_subject', to: 'grades#list_subject'
@@ -25,6 +28,7 @@ Rails.application.routes.draw do
   post 'users_and_subject/new', to: 'users_and_subject#create', as: :new_users_and_subject
 
   resources :notes
+  resources :subjects, only: [:index]
   resources :lessons
   resources :forms
   resources :grades

@@ -20,4 +20,16 @@ class User < ApplicationRecord
   def admin?
     user_type == 'admin'
   end
+
+  def self.is_free_for_lessons?(user_lessons, lesson)
+    user_lessons.each do |les|
+      # if Lesson.less_equal?(les, lesson)
+      #   puts "HERE"
+      #   return false
+      # end
+      return false if Lesson.less_equal?(les, lesson)
+    end
+    true
+  end
+
 end

@@ -1,0 +1,51 @@
+<h2>Admin's editor</h2>
+
+<div>
+  <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+
+  <b-modal id="modal-1" title="BootstrapVue">
+    <p class="my-4">Hello from modal!</p>
+  </b-modal>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+        <th scope="col">Monday</th>
+        <th scope="col">Tuesday</th>
+        <th scope="col">Wednesday</th>
+        <th scope="col">Thursday</th>
+        <th scope="col">Friday</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% (1..7).each do |lesson_number| %>
+    <tr>
+      <th scope="row"><%= lesson_number %></th>
+      <% (1..5).each do |day| %>
+      <td>
+        <% lesson = lesson_from_schedule(@lessons[day], lesson_number) %>
+        <% if lesson != '' %>
+        <div class="d-flex justify-content-end">
+          <%= lesson.subject.name %>&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="button" name="button" class="btn btn-outline-warning">
+            <%= image_tag("pencil.png", size:"20x20", alt: "edit button") %>
+          </button>&nbsp;
+          <button type="button" class="btn btn-outline-danger">x</button>
+        </div>
+        <% else %>
+        <%#  HERE SHOULD BE BUTTON "ADD" %>
+          <%= lesson %>
+          <div class="d-flex justify-content-end">
+            <button type="button" name="button" class="btn btn-outline-primary">
+              +
+            </button>
+          </div>
+        <% end %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

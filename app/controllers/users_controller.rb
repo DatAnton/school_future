@@ -30,6 +30,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_teachers
+    @teachers = User.where(user_type: 'teacher')
+    render json: @teachers
+  end
+
   def control_undef_users
     authorize User, :control_users?
     @users = User.where(user_type: "undefined")
