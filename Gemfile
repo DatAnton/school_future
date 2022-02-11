@@ -12,7 +12,7 @@ gem 'carrierwave', '~> 1.0'
 
 gem 'devise'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.3'
 gem 'nokogiri', '< 1.6.8'####maybe not need
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
